@@ -1,17 +1,18 @@
-const argument = " В этой строке должно быть более 30 символов";
+const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+const now = new Date()
+const calendarDiv = document.querySelector(".calendar")
+const indexOfDay = now.getDay() - 1 === -1 ? 6 : now.getDay() - 1
 
-const cleanAndSliceStr = (argum) => {
-    if (typeof argum !== 'string') {
-        return "В аргументы передана не строка"
+week.forEach((item, index) => {
+    let day = item
+
+    if (index === indexOfDay) {
+        day = `<b>${day}</b>`
     }
 
-    const trimmedArgum = argum.trim();
-
-    if (trimmedArgum.length > 30) {
-        return trimmedArgum.slice(0, 30) + "..."
-    } else {
-        return trimmedArgum
+    if (item === 'Saturday' || item === 'Sunday') {
+        day = `<i>${day}</i>`
     }
-}
 
-console.log(cleanAndSliceStr(argument));
+    calendarDiv.innerHTML += day + '<br>'
+})
